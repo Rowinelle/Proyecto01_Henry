@@ -35,7 +35,7 @@ Adicionalmente:
 **Carga**
 Se exportan los datos limpios a un nuevo archivo csv, y a partir de él, se crean archivos adicionales que serán consumidos por la API.
 
-`Proceso de ETL` : <Etl_P1MLOps.ipynb>
+`Proceso de ETL` : <https://github.com/Rowinelle/Proyecto01_Henry/blob/master/Etl_P1MLOps.ipynb>
 
 
 
