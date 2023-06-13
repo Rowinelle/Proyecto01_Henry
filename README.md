@@ -49,3 +49,45 @@ Se solicitan las siguientes consultas:
 - Cantidad de votaciones recibidas por una película, y el promedio de las mismas. En caso de que no alcance dos mil votaciones, se devuelve un mensaje explicitando la cantidad insuficiente de votos;
 -Exito de un actor, medido a través del retorno total generado por el mismo en todas las películas que ha participado. Además, la consulta arroja la cantidad de películas en las que ha participado y el promedio de retorno;
 -Exito obtenido por un director, medido a través del retorno total generado por el mismo en todas las películas que ha dirigido. Además, la consulta arroja el nombre de cada película interpretada, el  año de estreno, el retorno individual, el costo y la recaudación obtenida;
+
+`Desarrollo de las funciones` : <https://github.com>
+
+**Procedimiento**
+-en el desarrollo de cada función, se usaron archivos específicos, delimitando la cantidad de campos en función de lo requerido por la consulta, con el fin de optimizar el proceso;
+-se normalizan los inputs para Día y Mes, inhibiendo el impacto de mayúsculas y tildes. Se traducen los inputs al  idioma inglés;
+-el código está compuesto por 8 endpoints, correspondientes a un mensaje de bienvenida, 6 funciones y el modelo de recomendación que consume la API;
+
+
+Desarrollo del análisis exploratorio
+-------------
+-se llevó a cabo un análisis exploratorio de los datos, utilizando Pandas y Seaborn;
+-se visualiza la forma general del dataset provisto;
+-se realiza un análisis de contenido de las películas, explorando los conceptos mas frecuentes a través de la construcción de un Wordcloud; 
+-para determinados análisis, se decide acotar los datos a las películas estrenadas durante los últimos 40 años; 
+-algunos de los análisis efectuados, arrojan un ordenamiento de películas por popularidad, cantidad de películas estrenadas por mes, popularidad total alcanzada por películas de determinado director, etc; 
+El desarrollo del EDA propuesto podrás encontrarlo aquí debajo:
+
+`Desarrollo del análisis exploratorio` : <https://github.com>
+
+
+Modelo de recomendación
+-------------
+Para la construcción del modelo de recomendación, se utilizó la medida de la similitud del coseno, que se comenta brevemente a continuación. 
+Se realiza como primer paso, un pre-procesamiento de los datos, en el cual:
+-se decide realizar un modelo de recomendación basado en el contenido;
+-se eligen como features para la comparación de compatibilidad de cada película, el género, el director, y los actores;
+-los valores nulos fueron reemplazados por strings vacíos, para que puedan ser procesados como un término, por el componente de la biblioteca Sklearn que calcula las frecuencias de los términos, el TfidfVectorizer; 
+-se trabajó con un data set reducido, en función de la popularidad de la película y la antigüedad de la misma. Se considera relevante para un sistema de recomendación, sugerir películas que hayan tenido un alto nivel de aceptación por el público, y que puedan resultarle novedosas al usuario;
+-se decidió eliminar elementos por su duración, a fin de optimizar los tiempos de procesamiento y teniendo en cuenta que se contaba con recursos de espacio limitados para deployar el modelo; 
+En el desarrollo del modelo, se construyó una matriz de similitud de las películas entre sí, y a partir del input ingresado, se arroja como resultado los cinco títulos que tienen mayor puntaje de similitud con el target.
+La construcción del modelo la encontrarás en el siguiente link:
+
+`Desarrollo del sistema de recomendación` : <https://github.com>
+
+Tecnologías
+-------------
+Por último, las tecnologías utilizadas en este proyecto fueron:
+-IDE: Visual Studio Code;
+-API: FastAPI;
+-Servidor ASGI: Uvicorn;
+-Deploy: Render;
