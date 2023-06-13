@@ -69,6 +69,8 @@ Desarrollo del análisis exploratorio
 - para determinados análisis, se decide acotar los datos a las películas estrenadas durante los últimos 40 años; 
 - algunos de los análisis efectuados, arrojan un ordenamiento de películas por popularidad, cantidad de películas estrenadas por mes, popularidad total alcanzada por películas de determinado director, etc; 
 
+Consideraciones finales: el análisis exploratorio presentado es un breve de ejemplo, de cómo podrían utilizarse los recursos adquiridos, y da lugar a nuevos interrogantes a explorar, que por razones de tiempo, quedarán pendientes para un trabajo mas extenso.
+
 El desarrollo del EDA propuesto podrás encontrarlo aquí debajo:
 
 `Desarrollo del análisis exploratorio` : <https://github.com/Rowinelle/Proyecto01_Henry/blob/master/EDA_P1MLOps.ipynb>
