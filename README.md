@@ -102,3 +102,7 @@ Por último, las tecnologías utilizadas en este proyecto fueron:
 - API: FastAPI;
 - Servidor ASGI: Uvicorn;
 - Deploy: Render;
+
+
+`Link al video en YouTube` : <https://youtu.be/d1xkZWfhvok>
+
