@@ -61,7 +61,7 @@ def nombre():
     return {'comienzo':'Bienvenida'}
 
 
-@app.get("/peliculas_mes/{mes}")
+@app.get("/cantidad_filmaciones_mes/{mes}")
 def cantidad_filmaciones_mes(mes:str):
     mes_num = datetime.strptime(trad_fechas(mes), "%B").month
     pel_mes = fecha[fecha['release_date'].dt.month == mes_num]
@@ -69,7 +69,8 @@ def cantidad_filmaciones_mes(mes:str):
     return ('{} películas fueron estrenadas en el mes de {}'.format(cantidad, mes))
 
 
-@app.get("/peliculas_dia/{dia}")
+
+@app.get("/cantidad_filmaciones_dia/{dia}")
 def cantidad_filmaciones_dia(dia:str):
     dia_tr = trad_fechas(dia)
     pel_dia = fecha[fecha['release_date'].dt.strftime('%A') == dia_tr] 
@@ -77,7 +78,8 @@ def cantidad_filmaciones_dia(dia:str):
     return ('{} películas fueron estrenadas en los días {}'.format(cantidaddia, dia))
 
 
-@app.get("/puntuacion_pelicula/{pelicula}")
+
+@app.get("/score_titulo/{pelicula}")
 def score_titulo(pelicula: str):
     filtro = popularidad['title'] == pelicula
     score = popularidad.loc[filtro, 'popularity'].values[0] if filtro.any() else None
@@ -86,7 +88,7 @@ def score_titulo(pelicula: str):
 
 
 
-@app.get("/votos_pelicula/{pelicula}")
+@app.get("/votos_titulo/{pelicula}")
 def votos_titulo(pelicula: str):
     filtro = (votos['title'] == pelicula) 
     df_filtrado = votos.loc[filtro].sort_values('vote_count', ascending=False)
@@ -100,7 +102,7 @@ def votos_titulo(pelicula: str):
 
 
 
-@app.get("/actor/{actor}")
+@app.get("/get_actor/{actor}")
 def get_actor(actor: str):
     cantidad = actores['cast'].apply(lambda x: actor in x).sum()
     retorno = actores.loc[actores['cast'].apply(lambda x: actor in x), 'return'].sum()
@@ -110,7 +112,7 @@ def get_actor(actor: str):
 
 
 
-@app.get("/director/{nombre_director}")
+@app.get("/get_director/{nombre_director}")
 def get_director(nombre_director: str):
     df_filtrado = directores[directores['crew'].apply(lambda x: nombre_director in x)][['title', 'release_date', 'release_year','return', 'budget', 'revenue']]
     peliculas = df_filtrado['title']
@@ -128,31 +130,6 @@ def get_director(nombre_director: str):
 #importo dataset
 campos = ['index','title', 'genres', 'id', 'release_year', 'cast', 'crew']
 df_movies = pd.read_csv('datasets/modelo.csv', usecols = campos)
-
-####################################################
-print(df_movies[['title', 'index']])
-
-# ordeno el dataset por popularidad y anio
-#columnas = ['popularity', 'release_year']  
-#df_movies = df.sort_values(by=columnas, ascending=False)
-# elimino cortos y series
-#df_movies = df_movies[(df_movies['runtime'] == 0.0) | (df_movies['runtime']>40)]
-
-
-#df_movies['genres'] = df_movies['genres'].str.replace("[\[\]',]", "", regex=True)
-#df_movies['cast'] = df_movies['cast'].str.replace("[\[\]',]", "", regex=True)
-#df_movies['crew'] = df_movies['crew'].str.replace("[\[\]',]", "", regex=True)
-
-#reduzco la cantida de registros
-#df_movies = df_movies.head(6000)
-
-#agrego indice y reordeno 
-#df_movies.reset_index(drop=True, inplace=True)
-#df_movies.reset_index(inplace=True)
-#print(df_movies.columns)
-############################################################
-
-
 
 # defino los campos a usar en el modelo
 selected_features = ['cast','title', 'crew', 'genres']
@@ -176,13 +153,11 @@ list_of_all_titles = df_movies['title'].tolist()
 
 @app.get("/recomendacion/{titulo_pelicula}")
 def recomendacion(titulo_pelicula:str):
-    #print(df_movies['title'])
     find_close_match = difflib.get_close_matches(titulo_pelicula, list_of_all_titles)
     close_match = find_close_match[0]
     index_of_the_movie = df_movies[df_movies.title == close_match]['index'].values[0]
     similarity_score = list(enumerate(similarity[index_of_the_movie]))
     sorted_similar_movies = sorted(similarity_score, key = lambda x:x[1], reverse = True) 
-    #print('Peliculas sugeridas : \n')
     i = 1
     recomendadas = ''
     for movie in sorted_similar_movies:
@@ -190,7 +165,6 @@ def recomendacion(titulo_pelicula:str):
         title_from_index = df_movies[df_movies.index == index]['title'].values[0]
         if (i<6):
             recomendadas = recomendadas + '.' + title_from_index  
-            #print(i, '.',title_from_index)
             i+=1
     return {'Peliculas sugeridas': recomendadas}
 
