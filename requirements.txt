@@ -19,6 +19,4 @@ threadpoolctl
 typing_extensions
 tzdata
 uvicorn
-virtualenv
-virtualenv-clone
 
