@@ -56,7 +56,7 @@ Se solicitan las siguientes consultas:
 - el código está compuesto por 8 endpoints, correspondientes a un mensaje de bienvenida, 6 funciones y el modelo de recomendación que consume la API;
 
 
-`Desarrollo de las funciones` : <Funciones_P1MLOps.ipynb>
+`Desarrollo de las funciones` : <https://github.com/Rowinelle/Proyecto01_Henry/blob/master/Funciones_P1MLOps.ipynb>
 
 
 
@@ -71,7 +71,7 @@ Desarrollo del análisis exploratorio
 
 El desarrollo del EDA propuesto podrás encontrarlo aquí debajo:
 
-`Desarrollo del análisis exploratorio` : <EDA_P1MLOps.ipynb>
+`Desarrollo del análisis exploratorio` : <https://github.com/Rowinelle/Proyecto01_Henry/blob/master/EDA_P1MLOps.ipynb>
 
 
 
@@ -89,7 +89,7 @@ Se realiza como primer paso, un pre-procesamiento de los datos, en el cual:
 En el desarrollo del modelo, se construyó una matriz de similitud de las películas entre sí, y a partir del input ingresado, se arroja como resultado los cinco títulos que tienen mayor puntaje de similitud con el target.
 La construcción del modelo la encontrarás en el siguiente link:
 
-`Desarrollo del sistema de recomendación` : <Modelo2_ML_P1MLOps.ipynb>
+`Desarrollo del sistema de recomendación` : <https://github.com/Rowinelle/Proyecto01_Henry/blob/master/Modelo2_ML_P1MLOps.ipynb>
 
 
 
