@@ -60,7 +60,6 @@ python-dateutil
 python-dotenv
 python-multipart
 pytz
-pywin32
 PyYAML
 pyzmq
 regex
